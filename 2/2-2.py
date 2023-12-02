@@ -1,4 +1,8 @@
 def check_game(game):
+    rb = 0
+    gb = 0
+    bb = 0
+
     game_num = game.split(":")[0].split(" ")[1]
     log = game.split(":")[1].strip().split("; ")
 
@@ -9,18 +13,17 @@ def check_game(game):
             temp = act.split(" ")
             numbar = int(temp[0])
             color = temp[1]
-            # print(color)
-            # print(numbar)
-            if "red" in color and numbar > rc:
-                return 0
 
-            if "green" in color and numbar > gc:
-                return 0
+            if "red" in color:
+                rb = max(rb, numbar)
 
-            if "blue" in color and numbar > bc:
-                return 0
+            if "green" in color:
+                gb = max(gb, numbar)
 
-    return int(game_num)
+            if "blue" in color:
+                bb = max(bb, numbar)
+
+    return rb * gb * bb
 
 
 with open("input.txt") as f:
